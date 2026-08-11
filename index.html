@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scholaris helps students plan their money, control spending and build healthy saving habits.">
+<title>Scholaris — Spend Smarter. Save Better.</title>
+<style>
+:root{--purple:#673de6;--purple2:#7c4dff;--navy:#101a4a;--text:#17203b;--muted:#667085;--bg:#f7f7ff;--card:#fff;--line:#e7e8f3;--green:#22a447;--red:#ef4444;--orange:#f59e0b;--blue:#2684ff;--shadow:0 10px 30px rgba(27,24,75,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer}
+nav{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;z-index:20}
+.logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:22px;color:var(--purple)}.logo-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#6035df,#8b5cf6);display:grid;place-items:center;color:white;font-size:20px}.tag{display:block;font-size:11px;color:#667085;font-weight:500;margin-top:-2px}
+.navlinks{display:flex;gap:27px;align-items:center}.navlinks a{color:#252b45;text-decoration:none;font-size:14px}.navlinks a.active,.navlinks a:hover{color:var(--purple)}
+.profile{display:flex;align-items:center;gap:10px}.bell{font-size:19px}.avatar{width:34px;height:34px;border-radius:50%;background:#202a68;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+.hero{background:linear-gradient(120deg,#f8f7ff 0%,#eeeaff 100%);padding:58px 5% 45px;display:grid;grid-template-columns:1.05fr .95fr;gap:35px;align-items:center}.hero h1{font-size:54px;line-height:1.03;margin:0 0 20px;letter-spacing:-2px}.hero h1 span{color:var(--purple)}.hero p{font-size:17px;line-height:1.6;max-width:610px;color:#303951}.actions{display:flex;gap:14px;margin:24px 0 28px}.btn{border:0;border-radius:9px;padding:13px 22px;font-weight:700}.primary{background:var(--purple);color:#fff}.secondary{background:#fff;color:var(--purple);border:1px solid #b9aaff}.principles{display:flex;gap:28px}.principle{display:flex;gap:9px;max-width:170px}.ico{width:34px;height:34px;border-radius:50%;background:#eee9ff;display:grid;place-items:center;color:var(--purple);flex:none}.principle b{font-size:13px}.principle small{display:block;color:var(--muted);line-height:1.35;margin-top:3px}
+.hero-art{min-height:330px;position:relative;display:grid;place-items:center}.student{font-size:150px;filter:drop-shadow(0 18px 15px rgba(50,35,100,.15))}.float-card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px 20px;box-shadow:var(--shadow);min-width:180px}.balance{top:5px;left:5%}.score{bottom:10px;left:8%}.float-card small{color:var(--muted)}.float-card strong{font-size:22px;display:block;margin-top:5px}.score-ring{width:58px;height:58px;border-radius:50%;border:8px solid #d8f3de;border-top-color:#34b34f;display:grid;place-items:center;color:#1d8f3c;font-weight:800;float:right;margin-top:-42px}
+.container{width:90%;max-width:1250px;margin:0 auto}.section-title{display:flex;justify-content:space-between;align-items:center;margin:30px 0 14px}.section-title h2{font-size:19px;margin:0}.period{padding:9px 12px;border:1px solid var(--line);background:#fff;border-radius:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 3px 15px rgba(20,20,60,.03)}.stat .label{font-size:12px;color:var(--muted)}.stat .value{font-size:25px;font-weight:800;margin:8px 0 2px}.green{color:var(--green)}.red{color:var(--red)}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-top:16px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 3px 15px rgba(20,20,60,.03)}.card h3{margin:0 0 5px;font-size:16px}.muted{color:var(--muted);font-size:13px}
+.formgrid{display:grid;grid-template-columns:1.2fr .8fr .8fr .8fr;gap:10px;margin-top:16px}.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px}.field input,.field select{width:100%;padding:11px;border:1px solid #dfe1ed;border-radius:8px;outline:none;background:#fff}.field input:focus,.field select:focus{border-color:var(--purple)}.full{grid-column:1/-1}.addrow{display:flex;gap:10px}.addrow input{flex:1}
+.table{margin-top:18px}.row{display:grid;grid-template-columns:1.8fr .8fr .8fr .7fr 25px;gap:10px;align-items:center;padding:13px 6px;border-top:1px solid #f0f1f6;font-size:13px}.row:first-child{border-top:0}.purpose{font-weight:700}.purpose small{display:block;font-weight:400;color:var(--muted);margin-top:3px}.pill{display:inline-block;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:700}.need{background:#ffe8e8;color:#d63838}.important{background:#fff1d8;color:#a96a00}.want{background:#e5f8e9;color:#23853a}
+.tip{margin-top:15px;background:#f1efff;border-radius:10px;padding:13px;font-size:13px}.tip b{color:var(--green)}
+.bar{height:9px;background:#e9eaf2;border-radius:20px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#6d3fe7,#9a75ff);border-radius:20px}.goal{padding:12px 0;border-bottom:1px solid #f0f1f6}.goal:last-child{border-bottom:0}.goaltop{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}.goal small{color:var(--muted)}
+.donut{width:150px;height:150px;border-radius:50%;background:conic-gradient(#ef4444 0 38%,#2684ff 38% 60%,#24ad72 60% 73%,#7c4dff 73% 100%);margin:10px auto;position:relative}.donut:after{content:"₦15,000\\A Total Spent";white-space:pre;text-align:center;position:absolute;inset:29px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}.legend{display:grid;grid-template-columns:1fr 1fr;gap:7px;font-size:12px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.d1{background:#ef4444}.d2{background:#2684ff}.d3{background:#24ad72}.d4{background:#7c4dff}
+.ai{margin:16px 0 30px;background:linear-gradient(115deg,#6439df,#7c4de8);color:#fff;border-radius:16px;padding:23px;display:grid;grid-template-columns:1fr 2fr;gap:20px;align-items:center}.ai h2{margin:0 0 5px}.ai p{margin:0;opacity:.85;font-size:13px}.ask{display:flex;background:#fff;border-radius:9px;overflow:hidden}.ask input{border:0;outline:0;padding:13px;flex:1}.ask button{border:0;background:#6339de;color:#fff;padding:0 18px}
+footer{background:#101a4a;color:#fff;padding:38px 5%;margin-top:10px}.footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1.5fr;gap:30px}.footer-logo{font-size:20px;font-weight:800}.footer p,.footer a{color:#cbd0e5;font-size:12px;line-height:1.6;text-decoration:none}.footer h4{margin:0 0 10px;font-size:13px}.copy{border-top:1px solid #33406f;margin-top:25px;padding-top:16px;color:#aeb6d4;font-size:11px;text-align:right}
+.modal{display:none;position:fixed;inset:0;background:rgba(10,15,40,.5);z-index:50;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modalbox{background:#fff;border-radius:16px;padding:24px;max-width:430px;width:100%}.close{float:right;border:0;background:#eee;border-radius:50%;width:30px;height:30px}.toast{position:fixed;right:20px;bottom:20px;background:#17203b;color:#fff;padding:12px 16px;border-radius:9px;display:none;z-index:60;font-size:13px}
+@media(max-width:900px){.navlinks{display:none}.hero{grid-template-columns:1fr}.hero h1{font-size:42px}.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.footgrid{grid-template-columns:1fr 1fr}.ai{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr 1fr}.row{grid-template-columns:1.5fr .7fr .7fr 25px}.row .date{display:none}}
+@media(max-width:560px){nav{padding:0 4%}.hero{padding:38px 4%}.container{width:92%}.stats{grid-template-columns:1fr}.principles{gap:12px;flex-wrap:wrap}.hero-art{min-height:280px}.student{font-size:110px}.float-card{transform:scale(.9)}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.row{grid-template-columns:1.5fr .7fr 25px}.row .priority,.row .date{display:none}.footgrid{grid-template-columns:1fr}.copy{text-align:left}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="logo" style="text-decoration:none"><span class="logo-mark">🎓</span><span>Scholaris<span class="tag">Spend Smarter. Save Better.</span></span></a>
+  <div class="navlinks">
+    <a class="active" href="#dashboard">Dashboard</a><a href="#budget">Budget</a><a href="#expenses">Expenses</a><a href="#savings">Savings Goals</a><a href="#insights">Insights</a><a href="#ai">AI Assistant</a>
+  </div>
+  <div class="profile"><span class="bell">♧</span><span class="avatar">AA</span><span>⌄</span></div>
+</nav>
+
+<section class="hero">
+  <div>
+    <h1>Smart money<br>for <span>bright futures.</span></h1>
+    <p>Scholaris helps students plan their money, control spending, and build healthy saving habits.</p>
+    <div class="actions"><button class="btn primary" onclick="scrollToId('budget')">Plan My Money</button><button class="btn secondary" onclick="openExpense()">Add Expense ＋</button></div>
+    <div class="principles">
+      <div class="principle"><span class="ico">▣</span><div><b>Plan</b><small>Plan what your money will be used for.</small></div></div>
+      <div class="principle"><span class="ico">◫</span><div><b>Track</b><small>Track your spending in real time.</small></div></div>
+      <div class="principle"><span class="ico">♧</span><div><b>Save</b><small>Save consistently and reach your goals.</small></div></div>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="student">🧑🏾‍💻</div>
+    <div class="float-card balance"><small>Available Balance</small><strong id="heroBalance">₦25,000</strong><div style="color:#39b54a;font-size:22px">▰</div></div>
+    <div class="float-card score"><small>Money Score</small><strong>82<span style="font-size:13px">/100</span></strong><div class="score-ring">82</div><small style="color:#28a348">Great job! Keep it up.</small></div>
+  </div>
+</section>
+
+<main id="dashboard" class="container">
+  <div class="section-title"><h2>Your Money at a Glance</h2><select class="period"><option>This Week</option><option>This Month</option></select></div>
+  <div class="stats">
+    <div class="stat"><span class="label">Available Balance</span><div class="value" id="balance">₦25,000</div><span class="label">Money you can spend</span></div>
+    <div class="stat"><span class="label">Total Spent</span><div class="value red" id="spent">₦15,000</div><span class="label">This week</span></div>
+    <div class="stat"><span class="label">Total Saved</span><div class="value green" id="saved">₦10,000</div><span class="label">This week</span></div>
+    <div class="stat"><span class="label">Money Score</span><div class="value">82<span style="font-size:14px">/100</span></div><span class="label">Great job! Keep it up.</span></div>
+  </div>
+
+  <div class="grid" id="budget">
+    <section class="card" id="expenses">
+      <h3>What are you spending for?</h3><div class="muted">Plan your expenses before you spend.</div>
+      <div class="formgrid">
+        <div class="field"><label>Purpose</label><select id="purpose"><option>Printing / Photocopying</option><option>Assignment</option><option>Books & Textbooks</option><option>School Materials</option><option>Transportation</option><option>Food</option><option>Data & Airtime</option><option>Internet / Computer</option><option>Accommodation</option><option>Savings</option><option>School Fees</option><option>Personal Needs</option><option>Health</option><option>Social / Entertainment</option><option>Other</option></select></div>
+        <div class="field"><label>Amount (₦)</label><input id="amount" type="number" min="0" placeholder="e.g. 2000"></div>
+        <div class="field"><label>Date needed</label><input id="date" type="date"></div>
+        <div class="field"><label>Need or Want?</label><select id="priority"><option>Need</option><option>Important</option><option>Want</option></select></div>
+        <div class="field full"><label>Note (optional)</label><input id="note" placeholder="e.g. CSC assignment — 20 pages"></div>
+        <div class="full"><button class="btn primary" onclick="addExpense()">＋ Add Expense</button></div>
+      </div>
+      <div class="table" id="expenseList"></div>
+      <div class="tip" id="tip">💡 <b>Tip:</b> You have <b>₦25,000</b> available and planned expenses of <b id="plannedTip">₦17,000</b>. You can save <b id="canSave">₦8,000</b> or add more to your savings goal.</div>
+    </section>
+
+    <aside>
+      <section class="card" id="insights"><h3>Spending Breakdown</h3><div class="donut"></div><div class="legend"><span><i class="dot d1"></i>Food — ₦5,000</span><span>33%</span><span><i class="dot d2"></i>Transportation — ₦3,000</span><span>20%</span><span><i class="dot d3"></i>Printing — ₦2,000</span><span>13%</span><span><i class="dot d4"></i>Others — ₦5,000</span><span>34%</span></div></section>
+      <section class="card" id="savings" style="margin-top:16px"><div style="display:flex;justify-content:space-between"><h3>Savings Goals</h3><a href="#" onclick="openGoal();return false" style="color:var(--purple);font-size:12px">+ Add goal</a></div>
+        <div class="goal"><div class="goaltop"><b>💻 New Laptop</b><span>20%</span></div><div class="bar"><span style="width:20%"></span></div><small>₦12,000 / ₦60,000</small></div>
+        <div class="goal"><div class="goaltop"><b>🛟 Emergency Fund</b><span>25%</span></div><div class="bar"><span style="width:25%"></span></div><small>₦5,000 / ₦20,000</small></div>
+      </section>
+      <section class="card" style="margin-top:16px"><h3>Upcoming Expenses</h3><div id="upcoming"></div></section>
+    </aside>
+  </div>
+
+  <section class="ai" id="ai"><div><h2>Ask Scholaris AI</h2><p>Get smart advice about budgeting, saving and spending.</p></div><div><div class="ask"><input id="aiInput" placeholder="Ask anything... e.g. How can I budget ₦20,000 this week?"><button onclick="askAI()">➤</button></div><div id="aiReply" style="font-size:12px;margin-top:9px;opacity:.9"></div></div></section>
+</main>
+
+<footer class="footer"><div class="footgrid"><div><div class="footer-logo">🎓 Scholaris</div><p>A smart money management tool built for students to plan, track, save and achieve their goals.</p></div><div><h4>Product</h4><a href="#dashboard">Dashboard</a><br><a href="#budget">Budget</a><br><a href="#expenses">Expenses</a><br><a href="#savings">Savings Goals</a></div><div><h4>Resources</h4><a href="#insights">Money Tips</a><br><a href="#ai">AI Assistant</a><br><a href="#budget">Guides</a></div><div><h4>Company</h4><a href="#">About Us</a><br><a href="#">Contact Us</a><br><a href="#">Privacy Policy</a></div><div><h4>Stay updated</h4><p>Tips, updates and more—straight to your inbox.</p><div class="ask"><input placeholder="Enter your email"><button onclick="toast('Thanks for subscribing!')">Subscribe</button></div></div></div><div class="copy">© 2026 Scholaris. All rights reserved.</div></footer>
+
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">×</button><h3 id="modalTitle">Add Expense</h3><p class="muted" id="modalText">Use the planner above to add your expense.</p><button class="btn primary" onclick="closeModal();scrollToId('budget')">Open Planner</button></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const defaultExpenses=[
+ {purpose:"Printing / Photocopying",note:"CSC Assignment — 20 pages",amount:2000,date:"",priority:"Need"},
+ {purpose:"Assignment",note:"Data Structures Assignment",amount:3000,date:"",priority:"Need"},
+ {purpose:"Transportation",note:"Going to school",amount:2500,date:"",priority:"Important"},
+ {purpose:"Data & Airtime",note:"2GB Weekly Plan",amount:1500,date:"",priority:"Want"},
+ {purpose:"Food",note:"Meals for the week",amount:3000,date:"",priority:"Important"},
+ {purpose:"Savings",note:"For my laptop goal",amount:5000,date:"",priority:"Need"}
+];
+let expenses=JSON.parse(localStorage.getItem("scholarisExpenses")||"null")||defaultExpenses;
+const money=n=>"₦"+Number(n).toLocaleString("en-NG");
+function render(){
+ const list=document.getElementById("expenseList"), up=document.getElementById("upcoming");
+ list.innerHTML='<div class="row" style="font-size:11px;color:#98a0b5"><span>PLANNED EXPENSE</span><span>AMOUNT</span><span class="date">DATE</span><span class="priority">PRIORITY</span><span></span></div>';
+ expenses.forEach((e,i)=>{list.innerHTML+=`<div class="row"><span class="purpose">${e.purpose}<small>${e.note||"No note added"}</small></span><b>${money(e.amount)}</b><span class="date">${e.date||"—"}</span><span class="priority"><span class="pill ${e.priority.toLowerCase()}">${e.priority}</span></span><button style="border:0;background:none;color:#98a0b5" onclick="removeExpense(${i})">⋮</button></div>`});
+ const planned=expenses.reduce((a,e)=>a+Number(e.amount||0),0), base=25000, save=Math.max(base-planned,0);
+ document.getElementById("plannedTip").textContent=money(planned);document.getElementById("canSave").textContent=money(save);
+ document.getElementById("spent").textContent=money(planned);document.getElementById("saved").textContent=money(save);document.getElementById("balance").textContent=money(base);document.getElementById("heroBalance").textContent=money(base);
+ up.innerHTML=expenses.slice(0,3).map(e=>`<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f1f6;font-size:12px"><span>📌 ${e.purpose}<small style="display:block;color:#98a0b5">${e.date||"Planned"}</small></span><b class="red">${money(e.amount)}</b></div>`).join("");
+ localStorage.setItem("scholarisExpenses",JSON.stringify(expenses));
+}
+function addExpense(){
+ const purpose=document.getElementById("purpose").value, amount=Number(document.getElementById("amount").value), date=document.getElementById("date").value, priority=document.getElementById("priority").value, note=document.getElementById("note").value;
+ if(!amount){toast("Please enter an amount.");return}
+ expenses.push({purpose,amount,date,priority,note});render();
+ document.getElementById("amount").value="";document.getElementById("note").value="";toast("Expense added to your plan.");
+}
+function removeExpense(i){expenses.splice(i,1);render();toast("Expense removed.");}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});}
+function openExpense(){openModal("Add an expense","Choose what the money is for, enter the amount and set whether it is a need, important expense or want.");}
+function openGoal(){openModal("Savings goals","Set a target such as a laptop, school materials, emergency fund or another personal goal.");}
+function openModal(t,x){document.getElementById("modalTitle").textContent=t;document.getElementById("modalText").textContent=x;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function toast(x){const t=document.getElementById("toast");t.textContent=x;t.style.display="block";setTimeout(()=>t.style.display="none",2200)}
+function askAI(){
+ const q=document.getElementById("aiInput").value.trim(); if(!q){toast("Type a question first.");return}
+ let reply="Start with your needs: set aside school, transport and food costs first, then choose a realistic savings amount. Scholaris can help you compare your plan with your available money.";
+ if(/20000|20,000/.test(q)) reply="For ₦20,000, try starting with your essential school and transport costs, a food allowance, a small data budget, and then put the remaining amount toward savings. Adjust the numbers to your real needs.";
+ if(/save|saving/i.test(q)) reply="A simple rule is to decide your savings target before spending the rest. Create a goal, choose a target date, and divide the remaining amount into small contributions.";
+ document.getElementById("aiReply").textContent="Scholaris AI: "+reply;
+}
+render();
+</script>
+</body>
+</html>
