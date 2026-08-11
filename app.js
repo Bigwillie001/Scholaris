@@ -1,5 +1,5 @@
 /**
- * Scholaris - Financial OS Controller
+ * Scholaris - Funds Engine & Financial OS Controller
  */
 
 class ScholarisApp {
@@ -175,12 +175,12 @@ class ScholarisApp {
       runwayPill.className = 'pill pill-important';
       daysTotalText.textContent = 'Status: Budget Lightly';
       runwayBarFill.style.width = '50%';
-      runwayBarFill.style.background = 'linear-gradient(90deg, #f59e0b, #10b981)';
+      runwayBarFill.style.background = 'linear-gradient(90deg, #f59e0b, #ec4899)';
     } else {
-      runwayPill.textContent = 'Tight Pace';
+      runwayPill.textContent = 'Critical Pace';
       runwayPill.className = 'pill pill-need';
-      daysTotalText.textContent = 'Status: Prioritize Needs Only';
-      runwayBarFill.style.width = '20%';
+      daysTotalText.textContent = 'Status: Extreme Austerity Needed';
+      runwayBarFill.style.width = '15%';
       runwayBarFill.style.background = 'linear-gradient(90deg, #ef4444, #f59e0b)';
     }
   }
