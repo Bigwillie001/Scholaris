@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>Scholaris 2.0 — University Financial OS & Expense Tracker</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#dashboard" aria-label="Scholaris home">
+        <span class="brand-mark">🎓</span>
+        <span><strong>Scholaris 2.0</strong><small>Spend Smarter. Save Better.</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#funding">Funding & Income</a>
+        <a href="#expenses">Expenses</a>
+        <a href="#splits">Roommate Splits</a>
+        <a href="#savings">Savings Goals</a>
+        <a href="#copilot">AI Co-Pilot</a>
+        <a href="#reports">Reports</a>
+      </nav>
+      <div class="top-actions">
+        <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+        <button class="profile-chip" id="openProfile" title="Edit profile">
+          <span class="avatar" id="avatarInitials">AA</span>
+          <span><strong id="profileNameTop">Alex Johnson</strong><small id="profileCourseTop">Computer Science '27</small></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="dashboard">
+        <div class="eyebrow">⚡ University Financial Operating System</div>
+        <h1>Smart Money OS for Bright Student Futures.</h1>
+        <p>Master your semester budget, track scholarships, monitor your daily spending runway, build savings, and split shared bills without losing sight of the bigger picture.</p>
+        <div class="hero-actions">
+          <button class="primary" data-open="expense">＋ Add Expense</button>
+          <button class="secondary" data-open="funding">💰 Add Funding Source</button>
+          <button class="secondary" data-open="split">👥 Split Bill</button>
+        </div>
+        <div class="hero-note">
+          <strong>Personalized view:</strong> Scholaris now uses your editable profile name throughout the dashboard and AI Co-Pilot.
+          <button class="text-btn" id="heroEditProfile">Edit profile</button>
+        </div>
+      </section>
+
+      <section class="top-metrics">
+        <article class="metric wide">
+          <div class="metric-label">⏳ Semester Daily Runway</div>
+          <div class="metric-value" id="dailyRunway">₦0 / day</div>
+          <div class="metric-help">Estimated safe daily spending based on your remaining balance and semester end date.</div>
+          <div class="metric-foot"><span id="daysLeft">-- days left</span><span id="semesterPace">Semester Pace: Optimal</span></div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">❤️ Financial Health</div>
+          <div class="metric-value" id="healthScore">82 /100</div>
+          <div class="metric-help" id="healthText">Healthy starting position. Your spending mix will refine this score as you add data.</div>
+        </article>
+      </section>
+
+      <section class="cards-4">
+        <article class="stat-card"><div class="stat-icon">💵</div><div><span>Total Funding Received</span><strong id="totalFunding">₦0</strong><small id="fundingCount">0 active sources</small></div></article>
+        <article class="stat-card"><div class="stat-icon">💳</div><div><span>Available Balance</span><strong id="availableBalance">₦0</strong><small>Funding minus expenses and reserved savings.</small></div></article>
+        <article class="stat-card"><div class="stat-icon">🛍️</div><div><span>Total Expenses</span><strong id="totalExpenses">₦0</strong><small id="needsWants">Needs: 0% | Wants: 0%</small></div></article>
+        <article class="stat-card"><div class="stat-icon">🎯</div><div><span>Total Saved & Reserved</span><strong id="totalSaved">₦0</strong><small id="goalsCount">0 active goals</small></div></article>
+      </section>
+
+      <section class="panel" id="planner">
+        <div class="section-head">
+          <div><h2>⚡ Quick Expense Planner</h2><p>Log academic fees, food, transport, supplies, or one-off purchases instantly. Scholaris will include the entry in your totals and reports.</p></div>
+          <button class="ghost" data-open="expense">View All</button>
+        </div>
+        <div class="form-grid compact">
+          <label>Category / Purpose<select id="quickCategory"><option>Food</option><option>Transport</option><option>Education</option><option>Accommodation</option><option>Communication</option><option>Entertainment</option><option>Shopping</option><option>Other</option></select></label>
+          <label>Amount<div class="input-prefix"><span>₦</span><input id="quickAmount" type="number" min="0" placeholder="3500"></div></label>
+          <label>Date Needed<input id="quickDate" type="date"></label>
+          <label>Priority<select id="quickPriority"><option>Normal</option><option>High</option><option>Urgent</option></select></label>
+          <label class="span-2">Description / Note (Optional)<input id="quickNote" placeholder="e.g. CSC 301 Lab Manual & 25 Photocopy pages"></label>
+          <div class="form-action align-end"><button class="primary" id="quickAdd">＋ Add Expense to Plan</button></div>
+        </div>
+      </section>
+
+      <section class="panel" id="expenses">
+        <div class="section-head">
+          <div><h2>📋 Planned & Logged Expenses</h2><p>Review your student expenditures, spot patterns, and keep upcoming costs visible before they become surprises.</p></div>
+        </div>
+        <div class="toolbar"><input id="expenseSearch" placeholder="Search expense..."><select id="expenseFilter"><option value="all">All categories</option><option>Food</option><option>Transport</option><option>Education</option><option>Accommodation</option><option>Communication</option><option>Entertainment</option><option>Shopping</option><option>Other</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th>Purpose & Description</th><th>Category</th><th>Amount</th><th>Date Needed</th><th>Priority</th><th>Action</th></tr></thead><tbody id="expenseRows"></tbody></table></div>
+        <div id="expenseEmpty" class="empty">No expenses recorded yet. Add your first expense to start building your spending picture.</div>
+      </section>
+
+      <section class="panel split-grid">
+        <div>
+          <div class="section-head"><div><h2>📊 Spending Breakdown</h2><p>Real-time view of where your money is going. Use this to decide where a budget adjustment might help.</p></div></div>
+          <div class="chart-card" id="breakdownChart"></div>
+        </div>
+        <div>
+          <div class="section-head"><div><h2>🎯 Savings & Reserve Goals</h2><p>Ring-fence money for textbooks, laptops, certifications, accommodation, or unexpected campus emergencies.</p></div><button class="ghost" data-open="goal">＋ New Goal</button></div>
+          <div id="goalsList" class="stack"></div>
+          <div id="goalsEmpty" class="empty">No savings goals yet. Create a goal and Scholaris will track your progress.</div>
+        </div>
+      </section>
+
+      <section class="panel" id="splits">
+        <div class="section-head"><div><h2>👥 Roommate & Peer Splits</h2><p>Split dorm rent, generator fuel, Wi‑Fi, food, or group project costs evenly and keep track of who has paid.</p></div><button class="primary" data-open="split">＋ Split Bill</button></div>
+        <div id="splitsList" class="card-list"></div>
+        <div id="splitsEmpty" class="empty">No shared bills yet. Create a split to calculate each participant's share.</div>
+      </section>
+
+      <section class="panel" id="funding">
+        <div class="section-head"><div><h2>💰 Student Funding & Income Sources</h2><p>Manage your university grants, scholarships, loans, stipends, allowance payouts, part-time income, and other money entering your student budget.</p></div><button class="primary" data-open="funding">＋ Add Funding Source</button></div>
+        <div class="cards-3">
+          <article class="mini-stat"><span>Total Inflow</span><strong id="inflowStat">₦0</strong></article>
+          <article class="mini-stat"><span>Scholarships & Grants</span><strong id="scholarshipStat">₦0</strong></article>
+          <article class="mini-stat"><span>Loans, Work-Study & Other</span><strong id="otherFundingStat">₦0</strong></article>
+        </div>
+        <div class="subpanel">
+          <h3>Semester Budget Configuration</h3>
+          <p>Set your academic period so the daily runway and pacing indicators use dates that match your real semester.</p>
+          <div class="form-grid compact">
+            <label>Semester Start Date<input id="semesterStart" type="date"></label>
+            <label>Semester End Date (Exams Finish)<input id="semesterEnd" type="date"></label>
+            <div class="form-action align-end"><button class="secondary" id="saveSemester">Update Semester Dates</button></div>
+          </div>
+        </div>
+        <h3>All Funding Records</h3>
+        <div class="table-wrap"><table><thead><tr><th>Source Name</th><th>Category</th><th>Amount</th><th>Date Received</th><th>Recurrence</th><th>Actions</th></tr></thead><tbody id="fundingRows"></tbody></table></div>
+        <div id="fundingEmpty" class="empty">No funding records yet. Add the money you expect to use this semester.</div>
+      </section>
+
+      <section class="panel" id="savings">
+        <div class="section-head"><div><h2>🎯 Savings Goals & Emergency Reserve</h2><p>Turn intentions into visible targets. Create a goal, add deposits, and see what remains to be saved.</p></div><button class="primary" data-open="goal">＋ Add New Goal</button></div>
+        <div id="goalsFullList" class="card-list"></div>
+      </section>
+
+      <section class="panel" id="copilot">
+        <div class="ai-panel">
+          <div class="ai-avatar">🤖</div>
+          <div class="ai-content">
+            <h2 id="aiGreeting">Hello Alex! I'm your Scholaris AI Co-Pilot.</h2>
+            <p>Ask about your current balance, expenses, savings goals, semester runway, or spending patterns. The demo assistant uses your live Scholaris data so its answers change as you add information. Connect a model such as Groq later for open-ended AI reasoning.</p>
+            <div class="quick-prompts">
+              <button data-prompt="Give me a summary of my current finances.">💡 Financial summary</button>
+              <button data-prompt="Check my daily runway.">⏳ Check my daily runway</button>
+              <button data-prompt="How can I improve my savings?">🎯 Improve my savings</button>
+              <button data-prompt="Where am I spending the most?">📊 Biggest spending area</button>
+            </div>
+            <div class="ai-chat"><input id="aiInput" placeholder="Ask Scholaris AI anything about your student budget..."><button class="primary" id="aiSend">Send ➤</button></div>
+            <div id="aiResponse" class="ai-response" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="reports">
+        <div class="section-head"><div><h2>📁 Financial Reports & Data Management</h2><p>Export your budget logs for sponsors or parents, back up your data, or print a semester statement for your own records.</p></div></div>
+        <div class="report-actions">
+          <button class="secondary" id="exportExpenses">📄 Export Expenses (CSV)</button>
+          <button class="secondary" id="exportFunding">💰 Export Funding (CSV)</button>
+          <button class="secondary" id="printReport">🖨️ Print Semester Report</button>
+          <button class="ghost" id="loadDemo">🔄 Load Sample Demo Data</button>
+          <button class="danger" id="resetData">⚠️ Reset All Data</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose">×</button>
+
+      <section class="modal-panel" data-modal="profile">
+        <h2>👤 Edit Scholaris Profile</h2>
+        <p>Personalize the name and academic details shown across your Scholaris dashboard. Your username is no longer fixed to the sample profile.</p>
+        <div class="form-grid">
+          <label>Username<input id="profileNameInput" maxlength="40" placeholder="e.g. Chizzy"></label>
+          <label>Course / Program<input id="profileCourseInput" maxlength="60" placeholder="e.g. Computer Science"></label>
+          <label>Graduation Year<input id="profileYearInput" maxlength="4" placeholder="2027"></label>
+        </div>
+        <div class="modal-actions"><button class="secondary" id="profileCancel">Cancel</button><button class="primary" id="profileSave">Save Profile</button></div>
+      </section>
+
+      <section class="modal-panel" data-modal="funding">
+        <h2>💰 Add Funding / Income Source</h2>
+        <p>Add scholarships, grants, loans, allowances, work-study, side income, or other money you expect to use.</p>
+        <div class="form-grid">
+          <label>Funding Source Name<input id="fundName" placeholder="e.g. Government Scholarship / Monthly Allowance"></label>
+          <label>Category<select id="fundCategory"><option>Scholarship / Grant</option><option>Loan</option><option>Allowance</option><option>Work-Study</option><option>Side Income</option><option>Other</option></select></label>
+          <label>Amount<input id="fundAmount" type="number" min="0" placeholder="50000"></label>
+          <label>Date Received<input id="fundDate" type="date"></label>
+          <label>Frequency<select id="fundFrequency"><option>One-time</option><option>Weekly</option><option>Monthly</option><option>Semester</option></select></label>
+        </div>
+        <div class="modal-actions"><button class="secondary" data-close>Cancel</button><button class="primary" id="saveFunding">Add Funding Source</button></div>
+      </section>
+
+      <section class="modal-panel" data-modal="expense">
+        <h2>🛍️ Add New Expense</h2>
+        <p>Record a payment so Scholaris can update your balance, spending mix, and financial reports automatically.</p>
+        <div class="form-grid">
+          <label>Category / Purpose<select id="expCategory"><option>Food</option><option>Transport</option><option>Education</option><option>Accommodation</option><option>Communication</option><option>Entertainment</option><option>Shopping</option><option>Other</option></select></label>
+          <label>Amount<input id="expAmount" type="number" min="0" placeholder="5000"></label>
+          <label>Date Needed<input id="expDate" type="date"></label>
+          <label>Priority<select id="expPriority"><option>Normal</option><option>High</option><option>Urgent</option></select></label>
+          <label class="span-2">Description / Note<input id="expNote" placeholder="e.g. Organic Chemistry textbook rental"></label>
+        </div>
+        <div class="modal-actions"><button class="secondary" data-close>Cancel</button><button class="primary" id="saveExpense">Save Expense</button></div>
+      </section>
+
+      <section class="modal-panel" data-modal="goal">
+        <h2>🎯 Create Savings Goal</h2>
+        <p>Ring-fence funds for a laptop, textbooks, certification fee, accommodation, or an emergency reserve.</p>
+        <div class="form-grid">
+          <label>Goal Name<input id="goalName" placeholder="e.g. MacBook / Certification Exam Fee"></label>
+          <label>Target Amount<input id="goalTarget" type="number" min="0" placeholder="150000"></label>
+          <label>Current Saved Amount<input id="goalSaved" type="number" min="0" placeholder="25000"></label>
+          <label>Target Date<input id="goalDate" type="date"></label>
+        </div>
+        <div class="modal-actions"><button class="secondary" data-close>Cancel</button><button class="primary" id="saveGoal">Create Goal</button></div>
+      </section>
+
+      <section class="modal-panel" data-modal="split">
+        <h2>👥 Create Roommate Bill Split</h2>
+        <p>Enter a shared bill and participants. Scholaris calculates the equal share and tracks the amount you covered.</p>
+        <div class="form-grid">
+          <label>Bill Description<input id="splitDesc" placeholder="e.g. Apartment Rent / Generator Fuel / Fiber Wi‑Fi"></label>
+          <label>Total Bill Amount<input id="splitTotal" type="number" min="0" placeholder="120000"></label>
+          <label>Paid By You (Or Name)<input id="splitPayer" placeholder="Your name"></label>
+          <label class="span-2">Roommates / Participants (comma separated)<input id="splitPeople" placeholder="Alex, Tunde, Chioma, David"></label>
+        </div>
+        <div class="modal-actions"><button class="secondary" data-close>Cancel</button><button class="primary" id="saveSplit">Calculate & Save Split</button></div>
+      </section>
+
+      <section class="modal-panel" data-modal="deposit">
+        <h2>🏦 Deposit to Savings Goal</h2>
+        <p>Add money to a goal. The saved amount will update immediately.</p>
+        <input id="depositAmount" type="number" min="0" placeholder="Enter deposit amount">
+        <div class="modal-actions"><button class="secondary" data-close>Cancel</button><button class="primary" id="saveDeposit">Confirm Deposit</button></div>
+      </section>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
